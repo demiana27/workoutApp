@@ -1,0 +1,122 @@
+// Database Schema for AI Workout Coach
+// Paste this directly into dbdiagram.io to generate the interactive ERD.
+
+Table users {
+  id varchar [pk]
+  name varchar [not null]
+  email varchar [unique, not null]
+  phone varchar
+  password_hash varchar [not null]
+  role varchar [not null, note: 'athlete, coach, admin']
+  created_at timestamp [default: `now()`]
+}
+
+Table athlete_profiles {
+  user_id varchar [pk, ref: > users.id]
+  dob_or_age_bracket varchar [not null]
+  sex_for_norms varchar [not null]
+  sports varchar[] [note: 'Array of sport strings']
+  goal varchar [not null]
+  level varchar [not null]
+  equipment_access varchar [not null]
+}
+
+Table injury_history {
+  id varchar [pk]
+  user_id varchar [ref: > users.id, not null]
+  body_region varchar [not null, note: 'knee, shoulder, low_back, etc']
+  description text
+  status varchar [not null, note: 'active, resolved']
+  reported_at timestamp [default: `now()`]
+}
+
+Table programs {
+  id varchar [pk]
+  user_id varchar [ref: > users.id, not null]
+  created_by varchar [not null, note: 'engine, coach']
+  status varchar [not null, note: 'active, completed, archived']
+  current_cycle_number integer [default: 1]
+}
+
+Table program_cycles {
+  id varchar [pk]
+  program_id varchar [ref: > programs.id, not null]
+  cycle_number integer [not null]
+  start_date timestamp [not null]
+  end_date timestamp [not null]
+  based_on_cycle_id varchar [ref: > program_cycles.id, null]
+}
+
+Table workouts {
+  id varchar [pk]
+  cycle_id varchar [ref: > program_cycles.id, not null]
+  day_number integer [not null]
+  name varchar [not null]
+}
+
+Table exercises {
+  id varchar [pk]
+  name varchar [unique, not null]
+  body_regions varchar[] [not null]
+  movement_pattern varchar [not null]
+  video_url varchar
+  tips text
+  injury_flags varchar[] [not null]
+}
+
+Table workout_exercises {
+  id varchar [pk]
+  workout_id varchar [ref: > workouts.id, not null]
+  exercise_id varchar [ref: > exercises.id, not null]
+  target_sets integer [not null]
+  target_reps integer
+  target_load varchar
+  sort_order integer [not null]
+}
+
+Table logs {
+  id varchar [pk]
+  user_id varchar [ref: > users.id, not null]
+  workout_exercise_id varchar [ref: > workout_exercises.id, not null]
+  date timestamp [default: `now()`]
+  actual_reps integer
+  actual_load varchar
+  actual_time integer
+  rpe integer
+  completed_bool boolean [default: false]
+}
+
+Table wearable_uploads {
+  id varchar [pk]
+  user_id varchar [ref: > users.id, not null]
+  file_url varchar [not null]
+  parsed_summary_jsonb jsonb
+  uploaded_at timestamp [default: `now()`]
+}
+
+Table venues {
+  id varchar [pk]
+  name varchar [not null]
+  latitude double
+  longitude double
+  sport_types varchar[]
+  has_partner_deal_bool boolean [default: false]
+}
+
+Table coach_athlete_links {
+  coach_id varchar [ref: > users.id, not null]
+  athlete_id varchar [ref: > users.id, not null]
+  status varchar [not null, note: 'pending, active']
+  
+  Indexes {
+    (coach_id, athlete_id) [pk]
+  }
+}
+
+Table password_resets {
+  id varchar [pk]
+  user_id varchar [ref: > users.id, not null]
+  token_hash varchar [not null]
+  expires_at timestamp [not null]
+  used_bool boolean [default: false]
+}

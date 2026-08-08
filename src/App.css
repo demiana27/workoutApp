@@ -1,0 +1,92 @@
+/* App.css — cleared of all default Vite boilerplate. 
+   All styles are in index.css via the design system.
+   This file is kept for component-scoped overrides only. */
+
+/* Override heading uppercase for form labels and cards where readability matters */
+.choice-title {
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--font-sans);
+}
+
+.choice-description {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Inside glass cards and panels, preserve readability */
+.glass-card h3,
+.glass-card h4,
+.glass-panel h3,
+.glass-panel h4,
+.onboarding-card h2,
+.onboarding-card h3 {
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+/* Navigation buttons - override uppercase heading rule */
+.btn {
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--font-sans);
+}
+
+/* Badge text transform kept as uppercase for visual clarity */
+.badge {
+  text-transform: uppercase;
+}
+
+/* Form select and input labels */
+.form-label {
+  font-family: var(--font-sans);
+}
+
+/* Sport category headers keep uppercase for visual grouping */
+.sport-category-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+/* Workout exercise name — not uppercased */
+.exercise-name {
+  text-transform: none;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+/* KPI metric labels */
+.kpi-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* Landing page hero and feature headings — keep athletic uppercase */
+.landing-container h1,
+.landing-container h2 {
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.landing-container h3 {
+  text-transform: uppercase;
+  font-family: var(--font-display);
+}
+
+/* Landing feature description — normal text */
+.landing-container p {
+  text-transform: none;
+  font-family: var(--font-sans);
+}
+
+/* Input focus ring uses primary color properly */
+.form-input:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+  border-color: var(--primary);
+}
