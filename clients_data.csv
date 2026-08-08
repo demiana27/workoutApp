@@ -1,0 +1,5 @@
+"User ID","Full Name","Email Address","Phone Number","Verification Status","Account Role","Active Program Goal","Workouts Completed","Registration Date"
+"usr_101","Sarah Jenkins","sarah.j@example.com","+1 (555) 234-5678","Verified","athlete","Hypertrophy / Muscle Gain","12","2026-07-15 09:30:00"
+"usr_102","Marcus Vance","marcus.vance@example.com","+1 (555) 987-6543","Verified","athlete","Fat Loss / Conditioning","8","2026-07-22 14:15:00"
+"usr_103","Elena Rostova","elena.r@example.com","+1 (555) 456-7890","Pending OTP Verification","athlete","Strength & Power","3","2026-07-27 11:45:00"
+"usr_104","David Miller","david.m@example.com","+1 (555) 321-9876","Verified","athlete","General Fitness","5","2026-07-28 16:20:00"

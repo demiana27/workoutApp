@@ -1,0 +1,26 @@
+---
+description: Dev-only AI Coach Q&A checklist — use in Cursor chat to verify answers; never add this UI to the website
+alwaysApply: false
+globs: src/components/AIChatbot.jsx, chat_questions_log.csv
+---
+
+# AI Coach verification (Cursor only — not for the public app)
+
+When the user asks to verify chatbot answers, run QA, or says questions should appear "here not on the website":
+
+1. **Do not** add benchmark questions, answer keys, CSV export buttons, or coach-review prompts to the React UI unless they explicitly ask for a website feature.
+2. Reference dev-only files in the project root: `chat_questions_log.csv`, `clients_data.csv`, and `node export_clients.js` — these are for you in Cursor, not for the live site.
+3. In **this Cursor chat**, present each question below, give a correct coaching answer, then compare to `generateAIResponse` in `AIChatbot.jsx` and note gaps.
+
+## Standard verification questions
+
+| # | Question | What a correct answer must cover |
+|---|----------|----------------------------------|
+| 1 | What should I eat 1 hour before heavy squatting? | Small, easy-to-digest meal/snack; carbs + moderate protein; low fat/fiber; hydration; timing ~1–2 h before heavy work (1 h is tight — lighter snack OK). |
+| 2 | Is it okay to train if my legs are still sore? | DOMS vs sharp pain; mild soreness + reduced volume/intensity OK; skip or modify if pain alters form; sleep/hydration/active recovery. |
+| 3 | How many sets per muscle group should I do for hypertrophy? | ~10–20 hard sets/muscle/week (evidence range); 8–12 reps common; RPE 7–9; progression; rest days. |
+| 4 | What should I eat before training? | Same as #1 — balanced carbs + protein, timing, avoid heavy fats right before session. |
+| 5 | How many sets for muscle growth? | Same as #3. |
+| 6 | Warm-up / stretch before lifting? | Dynamic warm-up 5–10 min; avoid long static stretching pre-heavy lifts; CNS prep. |
+
+After answering in chat, suggest minimal code changes only if the in-app bot reply is misleading or off-topic for the question asked.
